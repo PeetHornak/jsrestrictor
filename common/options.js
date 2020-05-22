@@ -45,6 +45,8 @@ function prepare_level_config(action_descr, params = {
 	  <h2>${action_descr}</h2>
 	</div>
 	<form>
+
+		<p>Note that for fingerprintability prevention, JS Restrictor does not wrap objects that are not defined. For example, if an experimental feature like <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/deviceMemory"><code>navigator.deviceMemory</code></a> is not defined in your browser, JS Restrictor does not define the property even if it is shown below that the valut is defined.</p>
 	
 		<!-- Metadata -->
 		<div class="main-section">
@@ -70,10 +72,10 @@ function prepare_level_config(action_descr, params = {
 			<span class="section-header">Manipulate the time precision provided by Date and
 				performance:</span>
 		</div>
-		<div>
+		<div id="time_precision_options" class="${params.time_precision_checked ? "" : "hidden"}">
 			<div class="row">
 				<span class="table-left-column">Round time to:</span>
-				<select id="time_precision_round_precision" ${params.time_precision_checked ? "": "disabled"}>
+				<select id="time_precision_round_precision">
 					<option value="2" ${params.time_precision_round == 2 ? "selected" : ""}>hundredths of a second (1.230)</option>
 					<option value="1" ${params.time_precision_round == 1 ? "selected" : ""}>tenths of a second (1.200)</option>
 					<option value="0" ${params.time_precision_round == 0 ? "selected" : ""}>full seconds (1.000)</option>
@@ -97,9 +99,9 @@ function prepare_level_config(action_descr, params = {
 			<span class="section-header">Spoof hardware information to the most popular HW:</span>
 		</div>
 		<div>
-			<span class="table-left-column"><strong>JS navigator.deviceMemory:</strong> 4</span>
+			<span class="table-left-column">JS navigator.deviceMemory: 4</span>
 			<br>
-			<span class="table-left-column"><strong>JS navigator.hardwareConcurrency:</strong> 2</span>
+			<span class="table-left-column">JS navigator.hardwareConcurrency: 2</span>
 		</div>
 		
 		<!-- XMLHTTPREQUEST -->
@@ -119,18 +121,19 @@ function prepare_level_config(action_descr, params = {
 	</form>
 </div>`);
 	configuration_area_el.appendChild(fragment);
-	document.getElementById("time_precision_main_checkbox").addEventListener("click", function(e) {
-		time_precision_round_precision.disabled = !this.checked;
-	});
-	document.getElementById("xhr_main_checkbox").addEventListener("click", function(e) {
-		var xhr_options_el = document.getElementById("xhr_options");
-		if (this.checked) {
-			xhr_options_el.classList.remove("hidden");
-		}
-		else {
-			xhr_options_el.classList.add("hidden");
-		}
-	});
+	function connect_options_group(group_name) {
+		document.getElementById(group_name + "_main_checkbox").addEventListener("click", function(e) {
+			var options_el = document.getElementById(group_name + "_options");
+			if (this.checked) {
+				options_el.classList.remove("hidden");
+			}
+			else {
+				options_el.classList.add("hidden");
+			}
+		});
+	}
+	connect_options_group("time_precision");
+	connect_options_group("xhr");
 	document.getElementById("save").addEventListener("click", function(e) {
 		e.preventDefault();
 		new_level = {
