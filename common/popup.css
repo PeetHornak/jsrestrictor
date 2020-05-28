@@ -1,0 +1,86 @@
+body {
+	display: grid;
+	grid-template-columns: 32px 1fr 25px;
+	grid-template-areas:
+		"logo   jsr    controls"
+		"levels levels levels  ";
+	grid-gap: 3em;
+	padding: 1em;
+	margin: 1em;
+}
+
+h3 {
+	font-size: 3ex;
+}
+
+#logo {
+	grid-area: logo;
+	width: 32px;
+}
+
+#titletext {
+	grid-area: jsr;
+	display: block;
+	font-size: large;
+}
+
+#controls {
+	grid-area: controls;
+	width: 25px;
+}
+
+#level_controls {
+	grid-area: levels;
+}
+
+#current-site {
+	font-size: large;
+}
+
+#level-select {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+.level {
+	font-weight: bold;
+	font-size: large;
+	color: #4a4a4a;
+	margin: 0.7ex;
+	padding: 0.7ex;
+	border: 2px solid grey;
+	border-radius: 0.5ex;
+}
+
+.level:hover {
+	cursor: pointer;
+	background-color: #c9c9c9;
+	color: black;
+}
+
+.active {
+	border: 2px solid black;
+	background-color: #c9c9c9;
+	color:  black;
+}
+
+#controls {
+	font-weight: bold;
+	font-size: 1.5ex;
+	color: #4a4a4a;
+	margin: 0.7ex;
+	padding: 0.7ex;
+	border: 2px solid grey;
+	border-radius: 0.5ex;
+	//display: inline-block;
+	margin-top: 1.3ex;
+	margin-left: 2ex;
+}
+
+#controls:hover {
+	cursor: pointer;
+	border: 2px solid black;
+	background-color: #c9c9c9;
+	color:  black;
+}

@@ -1,0 +1,147 @@
+body {
+	color: black;
+	background-color: white;
+	display: grid;
+	grid-template-columns: 10em 1fr;
+	grid-template-areas: 
+	      "logo     content"
+	      "menu     content"
+	      "versions content"
+	      "footer   footer";
+	grid-gap: 3em;
+}
+
+section.logo {
+	grid-area: logo;
+}
+nav.menu {
+	grid-area: menu;
+}
+section.content {
+	grid-area: content;
+}
+section.versions {
+	grid-area: versions;
+}
+footer {
+	grid-area: footer;
+}
+
+@media (max-width: 600px) {
+	body {
+		/*  Redefine the grid into a single column layout. */
+		grid-template-columns: 1fr;
+		grid-template-areas: 
+			"content"
+			"menu"
+			"logo"
+			"versions"
+			"footer";
+	}
+}
+
+@media (min-width: 1300px) {
+	body {
+		/*  Redefine the grid into a three column layout with empty space on the left and right. */
+		grid-template-columns: 1fr 10em 1000px 10% 1fr;
+		grid-template-areas: 
+			"left-empty menu content logo     right-empty"
+			"left-empty menu content versions right-empty"
+			"left-empty menu footer  footer   right-empty"
+	}
+	section.logo {
+		padding-top: 3em;
+	}
+}
+
+section.logo img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+nav.menu {
+	font-family: sans-serif;
+}
+
+@media (min-width: 601px) {
+	nav.menu {
+		padding-top: 3em;
+	}
+}
+
+nav.menu ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav.menu {
+	background-color: #f7e032;
+}
+
+nav.menu ul ul {
+	padding-left: 1em;
+}
+
+nav.menu ul p:after {
+	content: "  »";
+}
+
+nav.menu ul a:visited, nav.menu ul a, nav.menu ul p {
+	color: black;
+	display: block;
+	text-decoration: none;
+	padding-top: 1ex;
+	padding-bottom: 1ex;
+	padding-right: 1em;
+	padding-left: 1em;
+	margin: 0;
+}
+
+nav.menu ul a:hover {
+	color: #f7e032;
+	background-color: #6c6216;
+}
+
+section.content {
+	text-align: justify;
+}
+
+.main-section {
+	padding: 0.5em;
+}
+
+#levels-list li, #domain-level-list li {
+	list-style-type: none;
+	margin: 7px;
+	padding: 7px;
+}
+.level {
+	margin: 7px;
+	padding: 7px;
+	font-weight: bold;
+	border: 2px solid grey;
+	border-radius: 5px;
+}
+
+.level:hover {
+	cursor: pointer;
+	background-color: #f7e032;
+	color:  blue;
+}
+
+.active {
+	border: 2px solid black;
+	background-color: #f7e032;
+	color:  black;
+}
+
+.undo{
+	background-color: red;
+	color: white;
+}
+
+.hidden{
+	visibility: hidden;
+}

@@ -1,10 +1,10 @@
 {
   "author": "Libor Polčák, Martin Timko",
   "background": {
-      "scripts": ["background.js"],
-      "persistent": true
+      "scripts": ["update.js", "url.js", "levels.js", "background.js"]
   },
   "browser_action": {
+    "browser_style": true,
     "default_icon": {
       "16": "img/icon-16.png",
       "32": "img/icon-32.png",
@@ -21,7 +21,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["document_start.js"],
+      "js": ["browser.js", "url.js", "levels.js", "borrowed.js", WRAPPING, "document_start.js"],
       "run_at": "document_start"
     }
   ],
@@ -39,8 +39,17 @@
   },
   "manifest_version": 2,
   "name": "JavaScript Restrictor",
-  "options_page": "options.html",
-  "permissions": ["storage", "tabs", "webRequest", "webRequestBlocking", "<all_urls>"],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "permissions": ["storage", "tabs"],
   "short_name": "JSR",
-  "version": "0.2.1"
+  "version": "0.3",
+  "browser_specific_settings": {
+    "gecko": {
+        "id": "jsr@javascriptrestrictor",
+        "strict_min_version": "57.0a1"
+      } 
+  }
 }
